@@ -1,0 +1,74 @@
+--서브쿼리의 기본 개념
+--SCOTT의 부서명을 알아내기 위한 subQuery
+
+select
+    dname
+from dept
+where deptno = (
+                select
+                    deptno
+                from emp
+                where ename='SCOTT'
+                );
+                
+    
+    
+
+--SCOTT과 같은 부서에서 근무하는 사원의 이름과 부서 번호를 출력하는 SQL문을 작성해보시오.
+select
+    ename,
+    deptno
+from emp
+where deptno = ( select
+                    deptno
+                from emp
+                where ename='SCOTT');
+                
+                
+-- SCOTT과 동일한 직급을 가진 사원을 출력하는 SQL문을 작성해보시오.
+select
+    ename
+from emp
+where job = (select 
+                job
+            from emp
+            where ename='SCOTT');
+            
+
+
+-- SCOTT의 급여와 동일하거나 더 많이 받는 사원 명과 급여를 출력하시오.
+select
+    ename,
+    sal
+from emp
+where sal >= (select
+                sal
+            from emp
+            where ename='SCOTT');
+            
+
+-- DALLAS에서 근무하는 사원의 이름, 부서 번호를 출력하시오.
+select
+    ename,
+    deptno
+from emp
+where deptno = (select deptno from dept where loc='DALLAS');
+
+
+--SALES 부서에서 근무하는 모든 사원의 이름과 급여를 출력하시오.
+select
+    ename,
+    sal
+from emp
+where deptno = (select deptno from dept where dname='SALES');
+
+
+
+
+
+-- mgr이 'KING'인 사원의 이름과 급여를 출력하시오.
+select
+    ename,
+    sal
+from emp
+where mgr = (select empno from emp where ename='KING');
