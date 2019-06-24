@@ -132,3 +132,26 @@ select
 from dept
 where deptno IN (select deptno from emp where job='MANAGER');
 
+
+-- ALL 연산자
+-- ALL 조건은 메인 쿼리의 비교조건이 서브 쿼리의 검색결과와 모든 값이 일치하면 참
+
+
+--30번 소속 사원들 중에서 급여를 가장 많이 받는 사원보다 더 많은 급여를 받는 사람의 이름, 급여를 출력하시오.
+select
+    ename,
+    sal
+from emp
+where sal > all(select sal from emp where deptno=30);
+
+
+-- 영업 사원들 보다 급여를 많이 받는 사원들의 이름과 급여와 직급을 출력하되, 영업사원을 출력하지 않습니다.
+select
+    ename,
+    sal,
+    job
+from emp
+where sal > all(select sal from emp where job='SALESMAN');
+
+
+
