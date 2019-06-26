@@ -82,3 +82,6 @@ select * from test2;
 -- intersect는 교집합의 기능, 두개의 테이블에 공통으로 존재하는 값을 select한다.
 
 
+
+
+
