@@ -39,3 +39,39 @@
 -- SET 연산자로 묶여지는 select 절에서 BLOB, CLOB, BFILE, VARRAY, 사용 불가
 -- ORDER BY 절은 맨 마지막에서 한번만 사용 가능, 서브쿼리 내에서는 ORDER BY 사용 불가
 -- SET 연산자로 연결 될 경우 쿼리 결과는 가장 상위 SELECT문의 컬럼읠 기준으로 연결
+
+
+insert into test1
+values
+('kim', 20);
+
+insert into test2
+values
+('kim', 30);
+
+insert into test1
+values
+('lee', 40);
+
+insert into test2
+values
+('park', 50);
+
+
+select * from test1; -- kim, lee
+select * from test2; -- kim, park
+
+select * from test1
+union
+select * from test2;
+
+insert into test1 values('choi', 60);
+insert into test2 values('choi', 60);
+-- test1 테이블과 test2 테이블에 같은 내용이 있지만 union set연산자는 DISTINCT 역할이 포함되어 있기 때문에 중복데이터를 하나만 출력한다.
+
+
+select * from test1
+union all
+select * from test2;
+-- union all 연산자는 disctinct 역할을 포함하지 않기 때문에 중복된 데이터라도 전부 보여주게 된다.
+
