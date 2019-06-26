@@ -75,3 +75,10 @@ union all
 select * from test2;
 -- union all 연산자는 disctinct 역할을 포함하지 않기 때문에 중복된 데이터라도 전부 보여주게 된다.
 
+
+select * from test1
+INTERSECT
+select * from test2;
+-- intersect는 교집합의 기능, 두개의 테이블에 공통으로 존재하는 값을 select한다.
+
+
