@@ -159,7 +159,52 @@ EXECUTE INSERT_PROC_01(12, '13', '14', '15');
 EXECUTE INSERT_PROC_01(22, '23', '24', '25');
 
 
+-- UPDATE PROCEDURE --
+CREATE OR REPLACE PROCEDURE UPDATE_PROC_01
+(
+    Column_1   IN  NUMBER,
+    Column_2   IN  NUMBER,
+    Column_3   IN  VARCHAR2,
+    Column_4   IN  VARCHAR2,
+    Column_5   IN  VARCHAR2
+)
+IS
+
+BEGIN
+    UPDATE  TEST_TB
+       SET  COLUMN_02   = Column_2,
+            COLUMN_03   = Column_3,
+            COLUMN_04   = Column_4,
+            COLUMN_05   = Column_5
+     WHERE  COLUMN_01   = Column_1;
+     COMMIT;
+END;
+
+
+--프로시저 실행 [ 주의 ! PROCEDURE 변수 이름과, UPDATE 테이블의 컬럼이름이 같으면 작동 안함]
+SET serveroutput on
+EXECUTE UPDATE_PROC_01(2, 31, '32', '33', '34');
+
+SELECT * FROM TEST_TB;
 
 
 
 
+
+-- DELETE PROCEDURE --
+CREATE OR REPLACE PROCEDURE DELETE_PROC_01
+(
+    Column01    IN  INTEGER
+)
+IS
+
+BEGIN
+    DELETE  
+      FROM  TEST_TB
+     WHERE  COLUMN_01   = Column01;
+END;
+    
+    
+--프로시저 실행
+SET serveroutput on
+EXECUTE DELETE_PROC_01(3);
