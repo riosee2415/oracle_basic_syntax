@@ -244,7 +244,7 @@ SELECT
                 ON  A.EMPNO     = Z.FM_NO
                AND  A.SAL + NVL(A.COMM, 0) > Z.FM_SAL
         ) Z
-    ON  A.EMPNO     = Z.FM_NO;
+    ON  A.EMPNO = Z.FM_NO;
 
 
 

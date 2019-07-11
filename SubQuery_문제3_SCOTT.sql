@@ -112,3 +112,58 @@ SELECT
                              WHERE  UPPER(JOB) = 'ANALYST'
                         );
 
+
+
+
+
+--문제5) EMP 테이블에서 ENAME, ROWNUM을 출력하세요. SAL 기준으로 내림차순 정렬을 하고, 1번 부터 5번 까지 조회하세요.
+SELECT
+        ROWNUM RN,
+        Z.*
+  FROM  (
+            SELECT
+                    ENAME
+              FROM  EMP
+             ORDER  BY SAL DESC
+        ) Z
+ WHERE  ROWNUM <= 5;
+        
+ 
+ 
+SELECT
+        EMPNO,
+        ENAME,
+        JOB,
+        SAL,
+        COMM
+  FROM  EMP;
+   
+   
+
+SELECT
+        DEPTNO,
+        LISTAGG(JOB, ', ') WITHIN GROUP ( ORDER BY DEPTNO ) AS JOB
+  FROM  EMP
+ GROUP  BY  DEPTNO;
+  
+ 
+ 
+/*
+    LISTAGG(가져올 칼럼, 구분자) WITHIN GROUP ( ORDER BY 순서컬럼 )
+
+*/
+
+SELECT
+        DEPTNO,
+        LISTAGG(ENAME, ',  ') WITHIN GROUP (ORDER BY DEPTNO) AS NAME
+  FROM  EMP
+ GROUP  BY DEPTNO;
+
+
+
+SELECT
+        DEPTNO,
+        LISTAGG(JOB, ',  ') WITHIN GROUP( ORDER BY DEPTNO ) AS JOB
+  FROM  EMP
+ GROUP  BY DEPTNO;
+  
