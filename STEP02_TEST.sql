@@ -80,14 +80,56 @@ SELECT
   FROM	EMP;
   
 
+
+--문제 8. 모든 사원의 사원번호, 사원명, 급여, 입사일을 출력하세요.
+--		단, 모든 사원명을 소문자로 출력하고, 날짜 출력 형식은 '2019/07/30' 으로 하세요.
+--		Alias는 사원번호, 사원명, 급여, 입사일
+SELECT
+		EMPNO									AS 사원번호,
+		LOWER(ENAME)							AS 사원명,
+		SAL										AS 급여,
+		TO_CHAR(HIREDATE, 'YYYY/MM/DD')			AS 입사일
+  FROM	EMP;
+ 
+
+--문제9. 사원이름에 'E'가 들어가는 사원의 사원번호, 사원명, 급여, 커미션, 부서번호를 출력하세요.
+--		단, 급여를 기준으로 내림차순 정렬 , 커미션이 없는 직원은 0으로 처리
+SELECT
+		EMPNO,
+		ENAME,
+		SAL,
+		NVL(COMM, 0),
+		DEPTNO
+  FROM	EMP
+ WHERE	ENAME LIKE '%S%';
+
+
+
+--문제10. 모든 사원의 사원번호, 사원명, 직급, 급여, 커미션 , 연봉을 출력하세요.
+--		COMM이 null일 경우 0으로 표현 / 연봉은 급여*12 + 커미션  
+--		Alias는 사원번호, 사원명, 직급, 급여, 커미션, 연봉
+SELECT
+		EMPNO							AS 사원번호,
+		ENAME							AS 사원명,
+		JOB								AS 직급,
+		SAL								AS 급여,
+		NVL(COMM, 0)					AS 커미션,
+		SAL * 12 + NVL(COMM, 0)			AS 연봉
+  FROM	EMP;
+		
  
  
- 
- 
- 
- 
- 
- 
+--문제11. 모든 사원의 사원번호, 사원명, 급여, 커미션을 출력하세요.
+--		단, 커미션이 null 인 사원은 'not comm' 으로 출력하세요.
+--		Alias는 사원번호, 사원명, 급여, 커미션
+-- 		급여가 낮은순으로 정렬
+SELECT
+		EMPNO								AS 사원번호,
+		ENAME								AS 사원명,
+		SAL									AS 급여,
+		NVL(TO_CHAR(COMM), 'NOT COMM')		AS 커미션
+  FROM	EMP
+ ORDER	BY SAL;
  
  
  
