@@ -42,13 +42,60 @@ SELECT
  GROUP  BY DEPTNO, JOB;
 
 
+--예제 2 : 사원 테이블을 부서 번호로 그룹지어 출력하시오.
+SELECT
+        A.DEPTNO
+  FROM  EMP A
+ GROUP  BY  A.DEPTNO;
+ 
+ 
+
+--예제 3 : 부서번호 별 급여 평균을 구하시오. 
+--		소수점은 모두 버리고 부서번호를  올림차순으로 정렬한다.
+SELECT
+        A.DEPTNO,
+        TRUNC(AVG(A.SAL)) AS AVG_SAL
+  FROM  EMP A
+ GROUP  BY  A.DEPTNO
+ ORDER  BY  A.DEPTNO    ASC;
+ 
+
+--예제 4 : 부서 별 급여 총액과 급여 평균액을 구하시오.
+--		소수점은 모두 버린다.
+SELECT
+        DEPTNO,
+        SUM(SAL) AS SUM_SAL,
+        TRUNC(AVG(SAL)) AS AVG_SAL
+  FROM  EMP
+ GROUP  BY  DEPTNO;
+ 
+ 
+--예제 5 : 소속부서 별 최대급여와 최소급여를 출력하시오.
+SELECT
+        DEPTNO,
+        MAX(SAL) AS MAX,
+        MIN(SAL) AS MIN
+  FROM  EMP
+ GROUP  BY  DEPTNO;
+ 
+
+-- 예제 6 : 부서별 사원의 수와 커미션을 받는 사원의 수를 계산하여 출력하시오.
+SELECT
+        DEPTNO,
+        COUNT(EMPNO)    AS CNT_EMP,
+        COUNT(COMM)     AS CNT_COMM
+  FROM  EMP
+ GROUP  BY  DEPTNO;
+
+
+
 /*
     HAVING절
     ○ 그룹함수를 사용해 GROUP BY절을 사용할 때, 그룹들에 대한 제한 조건이 필요하여 사용하는 조건절 이다.
     ○ SELECT의 조건은 WHERE절, GROUP BY의 조건절은 HAVING절 이다.
 */
 
---예제2. 부서별로 사원의 수가 4명 이상인 사원의 부서번호, 급여의 합계 구하기
+--예제1. 부서별로 사원의 수가 4명 이상인 사원의 부서번호, 급여의 합계 구하기
 SELECT
         DEPTNO,
         SUM(SAL)
@@ -57,7 +104,7 @@ SELECT
 HAVING  COUNT(*) >= 4;
 
 
---예제3. EMP테이블에서 직급이 CLERK이 아닌 사원에 대한 부서별로 급여의 함이 4000 이상인 부서의 정보를 출력
+--예제2. EMP테이블에서 직급이 CLERK이 아닌 사원에 대한 부서별로 급여의 함이 4000 이상인 부서의 정보를 출력
 SELECT
         DEPTNO,
         SUM(SAL)
@@ -67,7 +114,7 @@ SELECT
 HAVING  SUM(SAL) >= 4000;
 
 
---예제4. EMP테이블에서 전체 급여가 5000을 초과하는 각 업무에 대해서 업무와 월급여의 합계를 출력
+--예제3. EMP테이블에서 전체 급여가 5000을 초과하는 각 업무에 대해서 업무와 월급여의 합계를 출력
 --      (업무중에서 MANAGER는 제외, 월급여의 합계로 내림차순)
 SELECT
         JOB,
@@ -111,14 +158,14 @@ SELECT
     GROUP BY 절은 집계함수 없이도 사용이 가능하다.
 */
 
---예제7. EMP테이블에 있는 부서를 조회하라.
+--예제1. EMP테이블에 있는 부서를 조회하라.
 SELECT
         DEPTNO
   FROM  EMP
  GROUP  BY DEPTNO;
  
  
---예제8. 사원수가 다섯 명이 넘는 부서와 사원수를 조회하라.
+--예제2. 사원수가 다섯 명이 넘는 부서와 사원수를 조회하라.
 SELECT
         A.DEPTNO,
         B.DNAME,
@@ -130,7 +177,7 @@ SELECT
  GROUP  BY  A.DEPTNO, B.DNAME
 HAVING  COUNT(EMPNO) >= 5;
 
---예제9. 전체 월급이 5000을 초과하는 JOB에 대해서 JOB과 월급여 합계를 조회하라.
+--예제3. 전체 월급이 5000을 초과하는 JOB에 대해서 JOB과 월급여 합계를 조회하라.
 --      단, 판매원(SALES)은 제외하고 월 급여 합계로 내림차순 정렬하라.
 SELECT
         JOB             AS "직무",
