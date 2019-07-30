@@ -9,7 +9,7 @@
 SELECT
 		LEVEL															AS "LEVEL",	
 		B.JOB_TITLE														AS 직위,
-		LPAD(' ', 4*(LEVEL-1)) || A.FIRST_NAME || ' ' || A.LAST_NAME	AS 성명,
+		LPAD('ㄴ', 4*(LEVEL-1)) || A.FIRST_NAME || ' ' || A.LAST_NAME	AS 성명,
 		A.EMPLOYEE_ID													AS 사번,
 		A.MANAGER_ID													AS 매니저사번
   FROM	EMPLOYEES	A
@@ -21,3 +21,6 @@ SELECT
  		
  	
  	
+
+
+
