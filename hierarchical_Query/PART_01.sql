@@ -1,3 +1,11 @@
+/*
+ * USE DATABASE 	: ANYWHERE
+ * ORACLE VERSION	: 11G_SE, 12C_SE
+ * 
+ * */
+
+
+
 CREATE TABLE BOM (
      ITEM_ID INTEGER NOT NULL, -- 품목식별자
      PARENT_ID INTEGER, -- 상위품목 식별자
